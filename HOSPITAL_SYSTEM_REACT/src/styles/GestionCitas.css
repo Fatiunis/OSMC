@@ -1,0 +1,75 @@
+.gestion-citas-container {
+    padding: 20px;
+    max-width: 95%;
+    margin: auto;
+  }
+  
+  .titulo {
+    text-align: center;
+    font-weight: bold;
+    color: #1f9b1f; /* Verde del sistema */
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  button.btn-info {
+    background-color: #e1ad01; /* Mostaza */
+    border: none;
+    color: white;
+  }
+  
+  button.btn-info:hover {
+    background-color: #c99400; /* Mostaza oscuro */
+  }
+  
+  .react-big-calendar {
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rbc-toolbar-label {
+    font-weight: bold;
+    font-size: 18px;
+    color: #1f9b1f; /* Verde sistema */
+  }
+  
+  .rbc-event {
+    border: none;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 13px;
+    color: white;
+  }
+  
+  .rbc-event.past {
+    background-color: #a71d2a !important; /* Rojo oscuro */
+  }
+  
+  .rbc-event.upcoming {
+    background-color: #1f9b1f !important; /* Verde sistema */
+  }
+  
+  .rbc-event.in-progress {
+    background-color: #e1ad01 !important; /* Mostaza */
+  }
+  
+  .rbc-today {
+    background-color: rgba(31, 155, 31, 0.2) !important; /* Verde claro para el día actual */
+  }
+  
+  .rbc-toolbar button {
+    background-color: #e1ad01; /* Mostaza */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .rbc-toolbar button:hover {
+    background-color: #c99400; /* Mostaza oscuro */
+  }
+  

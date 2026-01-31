@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: hospital_db
+      MYSQL_SSL: 0
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persiste datos
+
+  backend:
+    build: ./sistema_adfs
+    ports:
+      - "8080:80"
+    volumes:
+      - ./sistema_adfs:/var/www/html
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: hospital_db
+      DB_USER: root
+      DB_PASS: rootpassword
+    depends_on:
+      - mysql
+
+  frontend:
+    build: ./HOSPITAL_SYSTEM_REACT
+    ports:
+      - "5173:5173"
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    volumes:
+      - ./HOSPITAL_SYSTEM_REACT:/app
+      - /app/node_modules
+
+
+    # NUEVO: Servicio de SonarQube
+  sonarqube:
+    image: sonarqube:community
+    ports:
+      - "9000:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+
+volumes:
+  mysql_data:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:

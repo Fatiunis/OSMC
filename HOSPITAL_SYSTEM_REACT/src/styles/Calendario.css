@@ -1,0 +1,41 @@
+/* src/styles/Calendario.css */
+.calendario-container {
+    padding: 20px;
+    margin: auto;
+    max-width: 95%;
+  }
+  
+  .rbc-calendar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+  }
+  
+  .rbc-calendar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    min-height: 600px;
+    height: 100%;
+  }
+  
+  .calendario-container {
+    min-height: 700px;
+    overflow-y: auto;
+  }
+
+  .calendario-container {
+  padding: 20px;
+  margin: auto;
+  max-width: 95%;
+  min-height: 700px;
+  overflow-y: auto;
+}
+
+
+.rbc-toolbar {
+  z-index: 10;
+  position: relative;
+}

@@ -1,0 +1,37 @@
+/* Botones personalizados para tema hospitalario */
+.btn-hospital-primary {
+    background-color: #2c662d;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+  }
+  
+  .btn-hospital-primary:hover {
+    background-color: #235022;
+  }
+  
+  .btn-hospital-warning {
+    background-color: #d4a017;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+  }
+  
+  .btn-hospital-warning:hover {
+    background-color: #bd8d12;
+  }
+  
+  .btn-hospital-secondary {
+    background-color: #6c757d;
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+  }
+  
+  .btn-hospital-secondary:hover {
+    background-color: #5a6268;
+  }
+  

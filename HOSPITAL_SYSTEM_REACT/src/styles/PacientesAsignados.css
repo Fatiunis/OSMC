@@ -1,0 +1,37 @@
+.paciente-card {
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #cfe3c8;
+  padding: 15px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.paciente-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.foto-paciente {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #2c662d;
+}
+
+.btn-ver-historial {
+  background-color: #2c662d;
+  color: white;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 8px 16px;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+}
+
+.btn-ver-historial:hover {
+  background-color: #245423;
+}

@@ -1,0 +1,51 @@
+.paciente-dashboard-container {
+    max-width: 90%;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .titulo {
+    text-align: center;
+    font-weight: bold;
+    color: #0a690a;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .card {
+    background: #ffffff;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+  }
+  
+  .card h5 {
+    color: #b88a14;
+    font-weight: bold;
+  }
+  
+  .table thead th {
+    background-color: #997417;
+    color: white;
+    text-align: center;
+  }
+  
+  .table tbody td {
+    text-align: center;
+  }
+  
+  .table tbody tr:hover {
+    background-color: rgba(31, 155, 31, 0.08);
+  }
+  
+  .list-group-item-info {
+    background-color: #d1ecf1;
+    color: #01570f;
+  }
+  
+  .list-group-item-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  

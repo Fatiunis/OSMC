@@ -1,0 +1,78 @@
+/* Estilos generales del Dashboard Médico */
+.medico-dashboard {
+    margin-left: 250px; /* ancho exacto del sidebar */
+    margin-right: 0px;
+    padding: 25px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    overflow-x: hidden; /* evitará que salga de pantalla */
+}
+
+.Admin-Container{
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ajusta el título */
+.medico-dashboard h2 {
+    color: #4e6b2f;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Ajusta las filas para tener buen espaciado */
+.medico-dashboard .row {
+    margin-bottom: 25px;
+}
+
+/* Tarjetas del Dashboard */
+.medico-dashboard .card {
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: white;
+    height: 100%; /* Misma altura para todas las tarjetas */
+}
+
+/* Efectos hover en tarjetas */
+.medico-dashboard .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Títulos de las tarjetas */
+.medico-dashboard .card-title {
+    font-weight: 600;
+    color: #4e6b2f;
+    border-bottom: 2px solid rgba(78, 107, 47, 0.2);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* Iconos */
+.medico-dashboard .card-title .icon {
+    margin-right: 10px;
+    color: #4e6b2f;
+}
+
+/* Botones */
+.medico-dashboard .btn {
+    background-color: #4e6b2f;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.medico-dashboard .btn:hover {
+    background-color: #5a920d;
+}
+
+/* Tablas */
+.medico-dashboard .table thead th {
+    background-color: #4e6b2f;
+    color: white;
+}

@@ -1,0 +1,122 @@
+/* Estilos de la barra lateral */
+.admin-sidebar {
+    width: 250px;
+    height: 100vh;
+    color: white;
+    position: fixed; /* Sidebar fijo */
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding-top: 20px; /* Espaciado superior */
+}
+
+/* Estilo del título (ahora es un enlace) */
+.sidebar-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Link del título "Administrador" */
+.admin-title-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 24px;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    transition: color 0.3s ease-in-out;
+}
+
+.admin-sidebar {
+    width: 250px; /* Ajusta el ancho del sidebar */
+    flex-shrink: 0; /* Evita que se reduzca */
+    background-color: #4e6b2f; /* Color del sidebar */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.admin-title-link:hover {
+    color: #c0a000; /* Cambia a dorado al pasar el mouse */
+}
+
+/* Estilos del menú */
+.admin-sidebar .nav {
+    display: flex; 
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+/* Estilos de los enlaces del sidebar */
+.admin-sidebar .nav-link {
+    display: flex;
+    align-items: center;
+    color: white !important;
+    padding: 12px;
+    font-size: 15px;
+    font-family: "Poppins", sans-serif;
+    transition: background 0.3s ease, transform 0.2s ease, color 0.3s ease;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* Íconos */
+.admin-sidebar .icon {
+    margin-right: 12px;
+    font-size: 20px;
+}
+
+/* Hover - Efecto cuando pasas el mouse */
+.admin-sidebar .nav-link:hover {
+    background-color: rgba(78, 127, 9, 0.5); 
+    color: white !important; /* Letras blancas */
+    transform: translateX(5px); /* Efecto sutil de desplazamiento */
+}
+
+/* Estilo del botón activo */
+.admin-sidebar .nav-link.active {
+    font-weight: bold;
+    background-color: rgba(90, 146, 13, 0.5);
+    color: white !important;
+}
+
+
+.btn-editar {
+    background-color: #1f9b1f;
+    color: white;
+    border: none;
+}
+ 
+
+.btn-editar:hover {
+    background-color: #158c15;
+}
+  
+.logout-container {
+    margin-top: auto;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .logout-button {
+    width: 100%;
+    background-color: #e1ad01; /* Color mostaza */
+    border: none;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .logout-button:hover {
+    background-color: #edb61dc3; /* Un poco más oscuro en hover */
+  }
+  

@@ -1,0 +1,245 @@
+/* Contenedor Principal */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+
+.home-container {
+    background-color: #ffffff;
+    padding: 50px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Título de Bienvenida */
+  .home-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .home-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .main-navbar {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    position: relative;
+    border-bottom: 1px solid #323932d7; /* Línea delgada debajo de todas las pestañas */
+  }
+
+  .nav-link-custom {
+    color: #000000 !important;
+    font-weight: bold;
+    margin: 0 15px;
+    padding-bottom: 5px;
+    transition: color 0.3s ease-in-out;
+  }
+
+  /* Animación más notoria al pasar el mouse */
+  .nav-link-custom:hover {
+    color: #D4A017 !important;
+  }
+
+  /* Centrado */
+  .centrado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  .page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  }
+  
+  /* Botón Principal */
+  .btn-main {
+    background-color: #D4A017;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 25px;
+    border-color: #D4A017;
+    padding: 12px 20px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-main:hover {
+    background-color: #B8860B;
+    border-color: #a07916;
+  }
+  
+  /* Botón de inicio de sesión */
+  .btn-login {
+    background-color: #D4A017;
+    color: #FFFFFF;
+    font-weight: bold;
+    border-radius: 30px;
+    padding: 10px 25px;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1rem;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-login:hover {
+    background-color: #B8860B;
+  }
+  
+  /* Ícono dentro del botón */
+  .btn-login svg {
+    font-size: 1.2rem;
+  }
+  
+
+  /* Tarjetas de Servicios */
+  .service-card {
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.23);
+    border: none;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .service-icon {
+    font-size: 3rem;
+    color: #009688;
+    margin-bottom: 15px;
+  }
+
+  .faq-container {
+    background-color: #ffffff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Título y subtítulo */
+  .faq-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .faq-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos del acordeón */
+  .accordion-button {
+    font-weight: bold;
+    color: #225e22;
+    background-color: #f8f9fa;
+  }
+  
+  .accordion-button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .accordion-body {
+    font-size: 1rem;
+    color: #444;
+    background-color: #ffffff;
+  }
+  
+  .main-content {
+    padding-bottom: 5%;
+    flex: 1; /* Hace que el contenido crezca y empuje el footer hacia abajo */
+  }
+  
+  /* Footer - Ajuste de Espaciado e Iconos Blancos */
+  footer .social-icon {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: #ffffff !important;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  footer .social-icon:hover {
+    transform: scale(1.2);
+  }
+
+  .footer {
+    padding: 20px 0;
+    background-color: #1a3d2f;
+    color: white;
+    text-align: center;
+  }
+  
+  /* Contenedor de la página de contacto */
+  .contacto-container {
+    background-color: #ffffff;
+    padding: 40px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  /* Título y subtítulo */
+  .contacto-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .contacto-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario */
+  .contacto-form .form-control {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+  
+  .contacto-form .btn-main {
+    background-color: #D4A017;
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 25px;
+    padding: 12px 20px;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .contacto-form .btn-main:hover {
+    background-color: #B8860B;
+  }
+  
+  /* Información de Contacto */
+  .contacto-info p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .contacto-info svg {
+    font-size: 1.5rem;
+    color: #1f9b1f;
+  }
+  

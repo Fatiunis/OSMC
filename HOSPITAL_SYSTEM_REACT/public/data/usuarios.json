@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "nombre": "Carlos Gómez",
+    "correo": "carlos@admin.com",
+    "password": "admin123",
+    "rol": "Administrador",
+    "fechaRegistro": "2024-01-10",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "nombre": "Ana Torres",
+    "correo": "ana@secretaria.com",
+    "password": "empleado123",
+    "rol": "Empleado",
+    "fechaRegistro": "2024-02-01",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "nombre": "María López",
+    "correo": "maria@paciente.com",
+    "password": "paciente123",
+    "rol": "Paciente",
+    "fechaRegistro": "2024-03-05",
+    "activo": true,
+    "poliza": "Plan Premium 90%",
+    "fechaVencimiento": "2025-03-05",
+    "pagosPendientes": false
+  }
+]

@@ -1,0 +1,29 @@
+<?php
+include(__DIR__ . "/../cors.php");
+
+// Si la solicitud es preflight (OPTIONS), responder sin más
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+include(__DIR__ . "/../db.php");
+
+$data = json_decode(file_get_contents("php://input"), true);
+
+if (!isset($data['id'])) {
+  echo json_encode(["success" => false, "message" => "ID requerido"]);
+  exit;
+}
+
+$stmt = $conn->prepare("DELETE FROM citas WHERE id = ?");
+$stmt->bind_param("i", $data['id']);
+
+if ($stmt->execute()) {
+  echo json_encode(["success" => true]);
+} else {
+  echo json_encode(["success" => false, "message" => $stmt->error]);
+}
+
+$stmt->close();
+$conn->close();

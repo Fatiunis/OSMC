@@ -1,0 +1,9 @@
+{
+    "build": {
+      "env": {
+        "APP_ENV": "production"
+      }
+    },
+    "start": "apache2-foreground"
+  }
+  

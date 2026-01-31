@@ -1,0 +1,20 @@
+.admin-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    width: 250px; /* Ajusta el ancho del sidebar */
+    flex-shrink: 0; /* Evita que se reduzca */
+    background-color: rgb(38, 61, 12); /* Color del sidebar */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Estilos del contenido del administrador */
+.admin-content {
+    margin-left: 250px; /* Desplazar contenido a la derecha */
+    padding: 30px;
+    min-height: 100vh; /* Asegurar que el contenido llene la pantalla */
+    background-color: #f8f9fa; /* Fondo suave */
+}

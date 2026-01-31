@@ -1,0 +1,21 @@
+  .nonedeco{
+    text-decoration: none !important;
+  }
+  
+  .btn-login {
+    text-decoration: none !important;
+    background-color: #d4a017 !important;
+    color: white !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+  }
+  
+  .btn-login:hover {
+    background-color: #b88a14 !important;
+  }
+  

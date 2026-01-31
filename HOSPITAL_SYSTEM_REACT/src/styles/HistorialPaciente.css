@@ -1,0 +1,170 @@
+.historial-container {
+    padding: 20px;
+    max-width: 95%;
+    margin: auto;
+  }
+  
+  .historial-container h2 {
+    text-align: center;
+    color: #275d27;
+    font-weight: bold;
+    margin-bottom: 25px;
+  }
+  
+  .card-historial {
+    border-radius: 12px;
+    border: 1px solid #cfe3c8;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    padding: 20px;
+    margin-bottom: 25px;
+    background: white;
+  }
+  
+  .card-historial h5,
+  .card-historial h6 {
+    color: #2c662d;
+    font-weight: bold;
+  }
+  
+  .card-historial ul {
+    padding-left: 20px;
+  }
+  
+  .card-historial img {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .paciente-info {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .foto-paciente {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #2c662d;
+  }
+
+ 
+  .btn-aceptar {
+    background-color: #d4a017;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .btn-aceptar:hover {
+    background-color: #bd8d12;
+  }
+
+
+
+
+  
+  .receta-formato {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid #cfe3c8;
+  }
+  
+  .receta-encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #2c662d;
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+  }
+  
+  .hospital-info h5 {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .hospital-info p,
+  .paciente-info-texto p {
+    margin: 0;
+  }
+  
+  .paciente-info-texto {
+    text-align: right;
+  }
+  
+  .foto-paciente {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #2c662d;
+    margin-top: 5px;
+  }
+  
+  .card-body h6 {
+    font-size: 17px;
+    font-weight: bold;
+    color: #2c662d;
+    margin-top: 30px;
+    border-bottom: 1px solid #cfe3c8;
+    padding-bottom: 5px;
+  }
+  
+  .card-body p,
+  .card-body li {
+    margin-bottom: 10px;
+  }
+  
+  ul {
+    padding-left: 20px;
+  }
+  
+  ul li {
+    border-left: 4px solid #d4a017;
+    padding-left: 10px;
+    margin-bottom: 8px;
+  }
+  
+  .img-resultado {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    border: 2px solid #ccc;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-hospital-warning {
+    background-color: #d4a017;
+    color: white;
+    font-weight: bold;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+  }
+  
+  .btn-hospital-warning:hover {
+    background-color: #bd8d12;
+  }
+  
+  .card + .card {
+    margin-top: 40px;
+  }
+  
+  .logo-receta {
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+  }
+  

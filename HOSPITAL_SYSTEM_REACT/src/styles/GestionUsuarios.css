@@ -1,0 +1,125 @@
+.gestion-usuarios-container {
+  padding: 20px;
+  max-width: 95%;
+  margin: auto;
+}
+
+.gestion-usuarios-container button {
+  display: block;
+  margin-bottom: 15px;
+}
+
+
+/* Título centrado con color acorde a la línea de diseño */
+.gestion-usuarios-container h2 {
+  text-align: center;
+  font-weight: bold;
+  color: #2c662d;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Botón de agregar usuario */
+.btn-add-user {
+  background-color: #7f7800 !important;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-add-user:hover {
+  background-color: #63a43e !important;
+}
+
+/* Tabla de usuarios */
+.usuarios-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de la tabla */
+.usuarios-table th {
+  background-color: #4e6b2f;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* Filas de la tabla */
+.usuarios-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Alternar color de filas */
+.usuarios-table tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* Botones de acciones */
+.btn-editar {
+  background-color: #49950e !important;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.btn-editar:hover {
+  background-color:  #3b661a !important;
+}
+
+.btn-eliminar {
+  background-color: #c8ae07 !important;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.btn-eliminar:hover {
+  background-color: #af8825 !important;
+}
+
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .usuarios-table {
+      font-size: 14px;
+  }
+
+  .btn-editar, .btn-eliminar {
+      padding: 5px 8px;
+      font-size: 12px;
+  }
+}
+
+.usuarios-table td,
+.usuarios-table th {
+  vertical-align: middle !important;
+}
+
+.btn-detalles {
+  background-color: #1f8500 !important;
+  border-color: #168500 !important;
+  color: white !important;
+}
+.btn-detalles:hover {
+  background-color: #00b312 !important;
+  border-color: #008510 !important;
+}
+

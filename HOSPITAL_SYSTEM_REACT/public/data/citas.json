@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "paciente": "José López",
+    "doctor": "Dra. Ana Morales",
+    "especialidad": "Pediatría",
+    "fecha": "2025-03-25",
+    "hora": "10:00",
+    "estado": "Pendiente",
+    "observaciones": "Consulta de seguimiento"
+  },
+  {
+    "id": 2,
+    "paciente": "María García",
+    "doctor": "Dr. Luis Herrera",
+    "especialidad": "Cardiología",
+    "fecha": "2025-03-26",
+    "hora": "11:30",
+    "estado": "Realizada",
+    "observaciones": "Chequeo general"
+  }
+]

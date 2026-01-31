@@ -1,0 +1,69 @@
+
+  [
+    {
+      "id": 1,
+      "nombre": "Dr. Juan Pérez",
+      "especialidad": "Pediatría",
+      "colegiado": "12345",
+      "foto": "/assets/doctor1.jpg",
+      "universidad": "Universidad de San Carlos",
+      "fechaGraduacion": "2015-11-20",
+      "telefonos": [
+        "5551-1234",
+        "5551-5678"
+      ],
+      "titulos": [
+        "/assets/tituloG.png",
+        "/assets/tituloG.png"
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Dra. Fátima González",
+      "especialidad": "Cardiología",
+      "colegiado": "67890",
+      "foto": "/assets/doctor2.jpg",
+      "universidad": "Universidad del Valle",
+      "fechaGraduacion": "2012-05-10",
+      "telefonos": [
+        "5552-8765"
+      ],
+      "titulos": [
+        "/assets/tituloG.png"
+      ]
+    },
+    {
+      "id": 3,
+      "nombre": "Dr. Carlos Ramírez",
+      "especialidad": "Cardiología",
+      "colegiado": "67890",
+      "foto": "/assets/doctor3.jpg",
+      "universidad": "Universidad del Valle",
+      "fechaGraduacion": "2012-05-10",
+      "telefonos": [
+        "5552-8765"
+      ],
+      "titulos": [
+        "/assets/tituloG.png"
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Dra. Sofía López",
+      "especialidad": "Pediatría",
+      "colegiado": "12345",
+      "foto": "/assets/doctor4.jpg",
+      "universidad": "Universidad de San Carlos",
+      "fechaGraduacion": "2015-11-20",
+      "telefonos": [
+        "5551-1234",
+        "5551-5678"
+      ],
+      "titulos": [
+        "/assets/tituloG.png",
+        "/assets/tituloG.png"
+      ]
+    }
+
+
+  ]

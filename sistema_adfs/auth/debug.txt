@@ -1,0 +1,150 @@
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+{"correo":"fatima@gmail.com","password":"12345"}
+
+DECODIFICADO:
+Array
+(
+    [correo] => fatima@gmail.com
+    [password] => 12345
+)
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+{"correo":"fatima@gmail.com","password":"12345"}
+
+DECODIFICADO:
+Array
+(
+    [correo] => fatima@gmail.com
+    [password] => 12345
+)
+
+
+INPUT CRUDO:
+email=fatima%40gmail.com&password=12345
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+email=fatima%40gmail.com&password=12345
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+email=fatima%40gmail.com&password=12345
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+email=fatima%40gmail.com&password=12345
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+email=fatima%40gmail.com&password=12345
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+{"correo":"fatima@gmail.com","password":"12345"}
+
+DECODIFICADO:
+Array
+(
+    [correo] => fatima@gmail.com
+    [password] => 12345
+)
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+{"correo":"fatima@gmail.com","password":"12345"}
+
+DECODIFICADO:
+Array
+(
+    [correo] => fatima@gmail.com
+    [password] => 12345
+)
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+{"correo":"fatima@gmail.com","password":"12345"}
+
+DECODIFICADO:
+Array
+(
+    [correo] => fatima@gmail.com
+    [password] => 12345
+)
+
+
+INPUT CRUDO:
+
+
+DECODIFICADO:
+
+
+INPUT CRUDO:
+{"correo":"fatima@gmail.com","password":"12345"}
+
+DECODIFICADO:
+Array
+(
+    [correo] => fatima@gmail.com
+    [password] => 12345
+)
+
+

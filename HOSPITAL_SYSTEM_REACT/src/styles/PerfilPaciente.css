@@ -1,0 +1,27 @@
+.perfil-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .titulo {
+    text-align: center;
+    font-weight: bold;
+    color: #1f9b1f;
+    font-size: 30px;
+    margin-bottom: 25px;
+  }
+  
+  .perfil-card {
+    background: #ffffff;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .perfil-card p {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
