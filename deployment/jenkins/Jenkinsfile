@@ -1,0 +1,66 @@
+pipeline {
+    agent any
+    environment {
+        // Lógica para determinar puertos y nombres según la rama
+        ENV_NAME = "${env.BRANCH_NAME == 'main' ? 'prod' : env.BRANCH_NAME}"
+        BE_PORT = "${ENV_NAME == 'prod' ? '80' : (ENV_NAME == 'uat' ? '8081' : '8080')}"
+        FE_PORT = "${ENV_NAME == 'prod' ? '3000' : (ENV_NAME == 'uat' ? '5174' : '5173')}"
+        DB_PORT = "${ENV_NAME == 'prod' ? '3308' : (ENV_NAME == 'uat' ? '3307' : '3306')}"
+        
+        COMPOSE_PROJECT_NAME = "hospital_${ENV_NAME}"
+        SCANNER_HOME = tool 'SonarScanner'
+    }
+    stages {
+        stage('Checkout & Setup') {
+            steps {
+                // Checkout automático por el Multibranch Pipeline
+                echo "Desplegando en ambiente: ${ENV_NAME}"
+            }
+        }
+        stage('Unit Testing') {
+            parallel {
+                stage('BE Tests') {
+                    steps {
+                        // Usar docker-compose -p para aislar el ambiente
+                        sh "docker-compose -p ${COMPOSE_PROJECT_NAME} run --rm backend php artisan test"
+                    }
+                }
+                stage('FE Tests') {
+                    steps {
+                        sh "docker-compose -p ${COMPOSE_PROJECT_NAME} run --rm frontend npm test"
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQubeServer') {
+                        // Proyectos dinámicos: hospital-be-dev, hospital-be-uat, etc.
+                        sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=hospital-be-${ENV_NAME} -Dsonar.sources=./sistema_adfs"
+                        sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=hospital-fe-${ENV_NAME} -Dsonar.sources=./HOSPITAL_SYSTEM_REACT"
+                    }
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Levanta solo los servicios necesarios para el ambiente
+                sh "docker-compose -p ${COMPOSE_PROJECT_NAME} up -d --build"
+                sh "docker exec backend_${ENV_NAME} php artisan migrate --force"
+            }
+        }
+    }
+    post {
+        failure {
+            mail to: 'fplopz@unis.edu.gt, product-owner@tuempresa.com',
+                 subject: "FALLO Pipeline ${ENV_NAME}: ${env.JOB_NAME}",
+                 body: "Revisar logs en ${env.BUILD_URL}. Falló revisión de código o Deuda Técnica."
+        }
+    }
+}
