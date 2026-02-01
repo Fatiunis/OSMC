@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { API_BASE } from "../../config.js";
 
 const NuevoPaciente = () => {
   const navigate = useNavigate();
@@ -27,27 +28,29 @@ const NuevoPaciente = () => {
 
     try {
       console.log("Enviando datos:", formData); // Debug
-      const res = await fetch("proyectobd-production.up.railway.app", {
+      const res = await fetch(`${API_BASE}/hospital/crear_paciente.php`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(credentials)
+        body: JSON.stringify(formData)
       });
 
-      console.log("Respuesta recibida:", response); // Debug
+      console.log("Respuesta recibida:", res); // Debug
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (!res.ok) {
+        const text = await res.text();
+        console.error("Error del servidor:", text);
+        throw new Error(`HTTP error! status: ${res.status}`);
       }
 
-      const data = await response.json();
+      const data = await res.json();
       console.log("Datos recibidos:", data); // Debug
 
       if (data.success) {
         navigate("/admin/pacientes");
       } else {
-        setError(data.error || "Error al crear el paciente");
+        setError(data.error || data.message || "Error al crear el paciente");
       }
     } catch (err) {
       console.error("Error completo:", err); // Debug

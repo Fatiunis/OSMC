@@ -7,5 +7,13 @@ export default defineConfig({
   json: {
     stringify: true,
   },
+  // Configuración para desarrollo en Docker
+  server: {
+    watch: {
+      usePolling: true,
+    },
+    host: true, // Necesario para que Docker exponga el servicio correctamente
+    strictPort: true,
+  },
 });
 

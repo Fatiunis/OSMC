@@ -23,6 +23,8 @@ services:
       DB_PASS: rootpassword
     depends_on:
       - mysql
+    volumes:
+      - ./sistema_adfs:/var/www/html  # Sincroniza código del backend
 
   frontend:
     build: ./HOSPITAL_SYSTEM_REACT
@@ -32,32 +34,8 @@ services:
       - "${FE_PORT}:5173" # Dev: 5173, UAT: 5174, Prod: 3000
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
     volumes:
-      - ./HOSPITAL_SYSTEM_REACT:/app
-      - /app/node_modules
-
-
-    # NUEVO: Servicio de SonarQube
-  sonarqube:
-    image: sonarqube:community
-    container_name: sonarqube_tool
-    ports:
-      - "9000:9000"
-    volumes:
-      - sonarqube_data:/opt/sonarqube/data
-      - sonarqube_extensions:/opt/sonarqube/extensions
-      - sonarqube_logs:/opt/sonarqube/logs
-
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins_tool
-    privileged: true
-    user: root
-    ports:
-      - "8082:8080" # Cambio a 8082 para no chocar con el BE de UAT
-      - "50000:50000"
-    volumes:
-      - jenkins_data:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock # Para que Jenkins use Docker
+      - ./HOSPITAL_SYSTEM_REACT:/app # Sincroniza tu código local con /app
+      - /app/node_modules           # Protege los módulos instalados en el contenedor
 
 
 volumes:
@@ -65,7 +43,3 @@ volumes:
   mysql_data_dev:
   mysql_data_uat:
   mysql_data_prod:
-  sonarqube_data:
-  sonarqube_extensions:
-  sonarqube_logs:
-  jenkins_data:

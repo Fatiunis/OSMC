@@ -11,7 +11,7 @@ include(__DIR__ . "/../db.php");
 try {
     $query = "SELECT m.*, u.correo
               FROM medicos m
-              LEFT JOIN usuarios u ON m.usuario_id = u.id";
+              LEFT JOIN usuarios u ON m.id_usuario = u.id";
 
     $result = $conn->query($query);
 

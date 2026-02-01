@@ -10,6 +10,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../../styles/Calendario.css";
+import { API_BASE } from "../../config.js";
+
 
 const locales = { es };
 const localizer = dateFnsLocalizer({ format, parse, startOfWeek, getDay, locales });

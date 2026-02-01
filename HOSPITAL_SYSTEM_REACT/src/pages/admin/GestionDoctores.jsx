@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Table, Button, Form, Modal, InputGroup, FormControl } from "react-bootstrap";
 import "../../styles/GestionUsuarios.css";
+import { API_BASE } from "../../config.js";
+
 
 const GestionDoctores = () => {
   const [doctores, setDoctores] = useState([]);

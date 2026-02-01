@@ -1,5 +1,17 @@
 <?php
-include(__DIR__ . "/../cors.php");
+// Habilitar CORS (IMPORTANTE: sin redirección)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: POST, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    http_response_code(204);
+    exit;
+}
+
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 include(__DIR__ . "/../db.php");
 
 
@@ -10,6 +22,7 @@ $input = file_get_contents("php://input");
 $data = json_decode($input, true);
 // Guardar JSON decodificado
 //file_put_contents("debug.txt", "DECODIFICADO:\n" . print_r($data, true) . "\n\n", FILE_APPEND);
+file_put_contents(__DIR__ . "/../auth_debug.txt", "DECODIFICADO:\n" . print_r($data, true) . "\n\n", FILE_APPEND);
 
 if (!isset($data['correo']) || !isset($data['password'])) {
     echo json_encode(["success" => false, "message" => "Datos incompletos"]);

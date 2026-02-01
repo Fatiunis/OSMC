@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Table, Button, Card, Badge } from "react-bootstrap";
+import { API_BASE } from "../../config.js";
 
 const HistorialClinico = () => {
   const { id } = useParams();
@@ -18,15 +19,29 @@ const HistorialClinico = () => {
     }
 
     // Cargar datos del paciente
-    fetch(`http://localhost/Proyecto_ADFS_BD/sistema_adfs/obtener_paciente.php?id=${id}`)
+    fetch(`${API_BASE}/hospital/pacientes/obtener_paciente_por_id.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ paciente_id: id })
+    })
       .then(res => res.json())
-      .then(data => setPaciente(data))
+      .then(data => {
+        if (data.success) setPaciente(data.paciente);
+        else console.error("Error al cargar paciente:", data.error);
+      })
       .catch(err => console.error("Error al cargar paciente:", err));
 
     // Cargar historial
-    fetch(`http://localhost/Proyecto_ADFS_BD/sistema_adfs/obtener_historial.php?id=${id}`)
+    fetch(`${API_BASE}/hospital/pacientes/obtener_historial.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ paciente_id: id })
+    })
       .then(res => res.json())
-      .then(data => setHistorial(data))
+      .then(data => {
+        if (data.success) setHistorial(data.procesos || []);
+        else console.error("Error al cargar historial:", data.error);
+      })
       .catch(err => console.error("Error al cargar historial:", err));
   }, [id, userRole, userId, navigate]);
 

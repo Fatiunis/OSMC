@@ -1,0 +1,16 @@
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => fati@admin.com
+    [password] => 123
+)
+
+

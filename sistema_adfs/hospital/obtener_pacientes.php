@@ -8,7 +8,7 @@ try {
     //  Este JOIN une pacientes con su usuario para obtener el correo
     $query = "SELECT p.*, u.correo 
               FROM pacientes p
-              LEFT JOIN usuarios u ON p.usuario_id = u.id";
+              LEFT JOIN usuarios u ON p.id_usuario = u.id";
 
     $result = $conn->query($query);
 

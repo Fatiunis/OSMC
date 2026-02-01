@@ -3,6 +3,7 @@ import RecetaPDF from "./RecetaPDF";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { API_BASE } from "../../../config.js";
 
 const HistorialPaciente = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const HistorialPaciente = () => {
   const [busqueda, setBusqueda] = useState("");
 
   useEffect(() => {
-    fetch(`${API_BASE}hospital/pacientes/obtener_paciente_por_id.php`, {
+    fetch(`${API_BASE}/hospital/pacientes/obtener_paciente_por_id.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ paciente_id: id })
@@ -23,7 +24,7 @@ const HistorialPaciente = () => {
   }, [id]);
 
   useEffect(() => {
-    fetch(`${API_BASE}hospital/pacientes/obtener_historial.php`, {
+    fetch(`${API_BASE}/hospital/pacientes/obtener_historial.php`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ paciente_id: id })

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Table, Button, Form, Modal, InputGroup, FormControl } from "react-bootstrap";
 import "../../styles/GestionUsuarios.css";
+import { API_BASE } from "../../config.js";
+
 
 const GestionUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -10,6 +12,7 @@ const GestionUsuarios = () => {
 
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState({
     id: null,
+    nombre: "", 
     correo: "",
     contrasena: "",
     rol: "admin",
@@ -40,7 +43,7 @@ const GestionUsuarios = () => {
       setUsuarioSeleccionado(usuario);
     } else {
       setIsEditing(false);
-      setUsuarioSeleccionado({ id: null, correo: "", contrasena: "", rol: "admin", estado: 1 });
+      setUsuarioSeleccionado({ id: null, nombre: "", correo: "", contrasena: "", rol: "admin", estado: 1 });
     }
     setShowModal(true);
   };
@@ -130,6 +133,7 @@ const GestionUsuarios = () => {
         <thead>
           <tr>
             <th>ID</th>
+            <th>Nombre</th>
             <th>Correo</th>
             <th>Rol</th>
             <th>Estado</th>
@@ -140,6 +144,7 @@ const GestionUsuarios = () => {
           {usuariosFiltrados.map((u) => (
             <tr key={u.id}>
               <td>{u.id}</td>
+              <td>{u.nombre}</td>
               <td>{u.correo}</td>
               <td>{u.rol}</td>
               <td>{u.estado === "1" ? "Activo" : "Inactivo"}</td>
@@ -159,6 +164,10 @@ const GestionUsuarios = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control type="text" name="nombre" value={usuarioSeleccionado.nombre} onChange={handleChange} />
+            </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Correo</Form.Label>
               <Form.Control type="email" name="correo" value={usuarioSeleccionado.correo} onChange={handleChange} />
