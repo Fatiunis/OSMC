@@ -1,0 +1,4 @@
+.env.dev
+.env.uat
+.env.prod
+.env

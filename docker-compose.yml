@@ -8,7 +8,11 @@ services:
     ports:
       - "${DB_PORT}:3306" # Dev: 3306, UAT: 3307, Prod: 3308
     volumes:
-      - mysql_data_${ENV_NAME}:/var/lib/mysql
+      # Usamos el nombre del ambiente para que los datos no se mezclen
+      - db_data_${ENV_NAME}:/var/lib/mysql
+    networks:
+      - hospital_net
+
       
 
   backend:
@@ -25,21 +29,34 @@ services:
       - mysql
     volumes:
       - ./sistema_adfs:/var/www/html  # Sincroniza código del backend
+    networks:
+      - hospital_net
 
   frontend:
     build: ./HOSPITAL_SYSTEM_REACT
     container_name: frontend_${ENV_NAME}
-
     ports:
       - "${FE_PORT}:5173" # Dev: 5173, UAT: 5174, Prod: 3000
+    # El host 0.0.0.0 es vital para que responda fuera del contenedor
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    environment:
+      - VITE_API_URL=http://localhost:${BE_PORT}
     volumes:
       - ./HOSPITAL_SYSTEM_REACT:/app # Sincroniza tu código local con /app
       - /app/node_modules           # Protege los módulos instalados en el contenedor
+    networks:
+      - hospital_net
+
+
+networks:
+  # Red para que los contenedores se hablen entre sí por nombre de servicio
+  # Docker le pondrá el nombre automáticamente: proyecto_hospital_net
+   hospital_net:
+    driver: bridge
 
 
 volumes:
-  # Declarar cada volumen dinámico
-  mysql_data_dev:
-  mysql_data_uat:
-  mysql_data_prod:
+  # Definimos los volúmenes para que Docker los cree según el ambiente
+  db_data_dev:
+  db_data_uat:
+  db_data_prod:
