@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { Button, Modal, Form, Table } from "react-bootstrap";
 import "../../styles/GestionUsuarios.css";
+import { API_BASE } from "../../config.js";
+
 
 const horarios = [
   "08:00", "08:30", "09:00", "09:30", "10:00", "10:30",

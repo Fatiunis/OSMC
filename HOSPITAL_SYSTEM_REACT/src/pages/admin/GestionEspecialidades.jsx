@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Table, Button, Form, Modal, InputGroup, FormControl } from "react-bootstrap";
 import "../../styles/GestionEspecialidades.css";
+import { API_BASE } from "../../config.js";
+
 
 const GestionEspecialidades = () => {
   const [especialidades, setEspecialidades] = useState([]);

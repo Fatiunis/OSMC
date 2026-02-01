@@ -1,4 +1,5 @@
 <?php
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -11,7 +12,7 @@ include(__DIR__ . "/../db.php");
 
 $input = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($input['correo']) || !isset($input['contrasena']) || !isset($input['rol'])) {
+if ( !isset($input['nombre']) || !isset($input['correo']) || !isset($input['contrasena']) || !isset($input['rol'])) {
     echo json_encode([
         "success" => false,
         "message" => "Faltan datos",
@@ -25,11 +26,13 @@ if (!$conn) {
     exit;
 }
 
+
+$nombre = $input['nombre'];
 $correo = $input['correo'];
 $contrasena = password_hash($input['contrasena'], PASSWORD_DEFAULT);
 $rol = $input['rol'];
 
-$sql = "INSERT INTO usuarios (correo, contrasena, rol, estado) VALUES (?, ?, ?, 1)";
+$sql = "INSERT INTO usuarios (nombre, correo, contrasena, rol, estado) VALUES (?, ?, ?, ?, 1)";
 $stmt = $conn->prepare($sql);
 
 if ($stmt === false) {
@@ -41,7 +44,7 @@ if ($stmt === false) {
     exit;
 }
 
-$stmt->bind_param("sss", $correo, $contrasena, $rol);
+$stmt->bind_param("ssss", $nombre, $correo, $contrasena, $rol);
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true, "message" => "Usuario creado"]);

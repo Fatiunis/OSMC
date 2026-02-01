@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
+import { API_BASE } from "../../config.js";
 
 const DetallePaciente = () => {
   const { id } = useParams();
@@ -8,9 +9,16 @@ const DetallePaciente = () => {
   const [paciente, setPaciente] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost/Proyecto_ADFS_BD/sistema_adfs/obtener_paciente.php?id=${id}`)
+    fetch(`${API_BASE}/hospital/pacientes/obtener_paciente_por_id.php`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ paciente_id: id })
+    })
       .then(res => res.json())
-      .then(data => setPaciente(data))
+      .then(data => {
+        if (data.success) setPaciente(data.paciente);
+        else console.error("Error al cargar paciente:", data.error);
+      })
       .catch(err => console.error("Error al cargar paciente:", err));
   }, [id]);
 

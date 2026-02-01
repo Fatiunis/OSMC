@@ -15,7 +15,10 @@ const LoginPage = () => {
   
     try {
       console.log("Enviando:", JSON.stringify(credentials));
-      const res = await fetch("https://proyectobd-production.up.railway.app/auth/login.php", {
+      const url = `${API_BASE}/auth/login.php`;
+      console.log("URL de login usada:", url);
+
+      const res = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
