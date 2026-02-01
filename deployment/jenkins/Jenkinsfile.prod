@@ -1,0 +1,57 @@
+pipeline {
+    agent any
+    environment {
+        // ID de la credencial creada en Jenkins para SonarQube
+        SONAR_TOKEN = credentials('sonar-token')
+        ENV_FILE = ".env.prod"
+        PROJECT_NAME = "hospital_prod"
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        
+        stage('SonarQube Analysis (BE & FE)') {
+            steps {
+                script {
+                    // Requisito 3.d.iii: Proyectos independientes por ambiente y área
+                    def scannerHome = tool 'SonarScanner' // Nombre configurado en Jenkins Tools
+                    
+                    withSonarQubeEnv('SonarQubeServer') {
+                        // Análisis FrontEnd
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_FE_PROD -Dsonar.sources=HOSPITAL_SYSTEM_REACT/src"
+                        
+                        // Análisis BackEnd
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_BE_PROD -Dsonar.sources=sistema_adfs"
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 5, unit: 'MINUTES') {
+                    // Requisito 3.b: Si no cumple el Quality Gate, aborta y envía correo
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+        stage('Deployment - DEV') {
+            steps {
+                // Despliegue automático tras aprobación/merge (Requisito 3.a)
+                sh "docker-compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
+            }
+        }
+    }
+    post {
+        failure {
+            // Requisito 3.b: Enviar correo al Lead Developer y Product Owner
+            mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
+                 subject: "Pipeline Fallido: Ambiente DEV",
+                 body: "El despliegue o la revisión de SonarQube falló. Por favor revisar los logs en Jenkins."
+        }
+    }
+}

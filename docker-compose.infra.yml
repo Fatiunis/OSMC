@@ -4,21 +4,31 @@ services:
     container_name: sonarqube_tool
     ports:
       - "9000:9000"
+    networks:
+      - hospital_network
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_logs:/opt/sonarqube/log
+
   jenkins:
     image: jenkins/jenkins:lts
     container_name: jenkins_tool
     privileged: true
     user: root
     ports:
-      - "8082:8080"
+      - "9080:8080" # Cambiado para no chocar con el BE de la App
       - "50000:50000"
+    networks:
+      - hospital_network
     volumes:
       - jenkins_data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker # Para que Jenkins use el docker del host
+
+networks:
+  hospital_network:
+    external: false # Esto creará la red si no existe
 
 volumes:
   sonarqube_data:
