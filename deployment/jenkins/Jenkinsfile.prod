@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+    environment {
+        // Credenciales configuradas previamente en Jenkins
+        SONAR_TOKEN = credentials('sonar-token')
+        SCANNER_HOME = tool 'SonarScanner' 
+    }
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Unit Testing') {
+            parallel {
+                stage('BE Tests') {
+                    steps {
+                        sh 'docker-compose run --rm backend php artisan test' // Ajustar al comando de tu BE
+                    }
+                }
+                stage('FE Tests') {
+                    steps {
+                        sh 'docker-compose run --rm frontend npm test'
+                    }
+                }
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    // Análisis Backend PROD
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=BE_PROD -Dsonar.sources=./sistema_adfs -Dsonar.host.url=http://sonarqube:9000"
+                    }
+                    // Análisis Frontend PROD
+                    withSonarQubeEnv('SonarQubeServer') {
+                        sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=FE_PROD -Dsonar.sources=./HOSPITAL_SYSTEM_REACT -Dsonar.host.url=http://sonarqube:9000"
+                    }
+                }
+            }
+        }
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+        stage('Deploy Dev') {
+            steps {
+                sh 'docker-compose up -d --build'
+            }
+        }
+    }
+    post {
+        failure {
+            mail to: 'lead-developer@tuempresa.com, product-owner@tuempresa.com',
+                 subject: "FALLO Pipeline DEV: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                 body: "Revisar el log en: ${env.BUILD_URL}. Falló en revisión de código o deuda técnica."
+        }
+    }
+}
