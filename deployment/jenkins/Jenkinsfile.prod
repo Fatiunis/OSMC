@@ -36,12 +36,21 @@ pipeline {
             }
         }
 
-        stage('Deployment - PROD') { // Cambiado a PROD para ser consistente con ENV_FILE
+        stage('Deployment - PROD') {
             steps {
-                // Solo llega aquí si AMBOS Quality Gates de arriba fueron exitosos
-                sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
+                script {
+                    // Inject the secret file defined in Jenkins Credentials
+                    withCredentials([file(credentialsId: 'prod-env-file', variable: 'PROD_ENV_SECRET')]) {
+                        // Copy the secret file to the expected location in the workspace
+                        sh "cp \$PROD_ENV_SECRET .env.prod"
+                        
+                        // Now run the build command (the file now exists)
+                        sh "docker compose -p ${PROJECT_NAME} --env-file .env.prod up -d --build"
+                    }
+                }
             }
         }
+
     }
     post {
         success {
