@@ -1,0 +1,30 @@
+name: Build & Analyze
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Permite un análisis completo del historial
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v2.4.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      - name: Wait for Quality Gate status
+        uses: SonarSource/sonarqube-quality-gate-action@v1.4.0
+        # Configura esto para que falle si el Quality Gate no pasa
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
