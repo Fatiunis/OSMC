@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        // ID de la credencial creada en Jenkins para SonarQube
         SONAR_TOKEN = credentials('sonar-token')
         ENV_FILE = ".env.prod"
         PROJECT_NAME = "hospital_prod"
@@ -16,42 +15,49 @@ pipeline {
         stage('SonarQube Analysis (BE & FE)') {
             steps {
                 script {
-                    // Requisito 3.d.iii: Proyectos independientes por ambiente y área
-                    def scannerHome = tool 'SonarScanner' // Nombre configurado en Jenkins Tools
+                    def scannerHome = tool 'SonarScanner'
                     
+                    // 1. Análisis y validación FrontEnd
                     withSonarQubeEnv('SonarQubeServer') {
-                        // Análisis FrontEnd
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_FE_PROD -Dsonar.sources=HOSPITAL_SYSTEM_REACT/src"
-                        
-                        // Análisis BackEnd
+                    }
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                    
+                    // 2. Análisis y validación BackEnd
+                    withSonarQubeEnv('SonarQubeServer') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_BE_PROD -Dsonar.sources=sistema_adfs"
+                    }
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
                     }
                 }
             }
         }
 
-        stage('Quality Gate') {
+        stage('Deployment - PROD') { // Cambiado a PROD para ser consistente con ENV_FILE
             steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    // Requisito 3.b: Si no cumple el Quality Gate, aborta y envía correo
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
-        stage('Deployment - DEV') {
-            steps {
-                // Despliegue automático tras aprobación/merge (Requisito 3.a)
+                // Solo llega aquí si AMBOS Quality Gates de arriba fueron exitosos
                 sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
             }
         }
     }
     post {
-        failure {
-            // Requisito 3.b: Enviar correo al Lead Developer y Product Owner
+        success {
             mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
-                 subject: "Pipeline Fallido: Ambiente DEV",
-                 body: "El despliegue o la revisión de SonarQube falló. Por favor revisar los logs en Jenkins."
+                 subject: "✅ Pipeline Exitoso: Ambiente PRODUCTION",
+                 body: """El despliegue se completó correctamente.
+                          - SonarQube FE: PASSED
+                          - SonarQube BE: PASSED
+                          - Docker Compose: UP
+                          
+                          Revisar en: ${env.BUILD_URL}"""
+        }
+        failure {
+            mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
+                 subject: "❌ Pipeline Fallido: Ambiente PRODUCTION",
+                 body: "El despliegue o la revisión de SonarQube falló. Por favor revisar los logs en: ${env.BUILD_URL}"
         }
     }
 }
