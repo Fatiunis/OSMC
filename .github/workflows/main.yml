@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted 
     steps:
       - uses: actions/checkout@v4
         with:
@@ -28,3 +28,7 @@ jobs:
         timeout-minutes: 5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      - name: Check SonarQube reachability
+        run: curl -v ${{ secrets.SONAR_HOST_URL }}/api/v2/analysis/version
+
