@@ -12,19 +12,21 @@ services:
       - sonarqube_logs:/opt/sonarqube/log
 
   jenkins:
-    image: jenkins/jenkins:lts
+    build: 
+      context: .
+      dockerfile: Dockerfile.jenkins
     container_name: jenkins_tool
     privileged: true
     user: root
     ports:
-      - "9080:8080" # Cambiado para no chocar con el BE de la App
+      - "8082:8080"
       - "50000:50000"
     networks:
       - hospital_network
     volumes:
       - jenkins_data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker # Para que Jenkins use el docker del host
+      #- /usr/bin/docker:/usr/bin/docker # Para que Jenkins use el docker del host
 
 networks:
   hospital_network:

@@ -42,7 +42,7 @@ pipeline {
         stage('Deployment - DEV') {
             steps {
                 // Despliegue automático tras aprobación/merge (Requisito 3.a)
-                sh "docker-compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
+                sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
             }
         }
     }

@@ -13,8 +13,6 @@ services:
     networks:
       - hospital_net
 
-      
-
   backend:
     build: ./sistema_adfs
     container_name: backend_${ENV_NAME}
@@ -46,7 +44,6 @@ services:
       - /app/node_modules           # Protege los módulos instalados en el contenedor
     networks:
       - hospital_net
-
 
 networks:
   # Red para que los contenedores se hablen entre sí por nombre de servicio
