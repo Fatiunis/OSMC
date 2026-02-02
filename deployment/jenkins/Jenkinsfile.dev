@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        // ID de la credencial creada en Jenkins para SonarQube
         SONAR_TOKEN = credentials('sonar-token')
         ENV_FILE = ".env.dev"
         PROJECT_NAME = "hospital_dev"
@@ -13,45 +12,56 @@ pipeline {
             }
         }
         
-        stage('SonarQube Analysis (BE & FE)') {
+        stage('SonarQube Analysis & Quality Gate') {
             steps {
                 script {
-                    // Requisito 3.d.iii: Proyectos independientes por ambiente y área
-                    def scannerHome = tool 'SonarScanner' // Nombre configurado en Jenkins Tools
+                    def scannerHome = tool 'SonarScanner'
                     
+                    // CORRECCIÓN 1: Se debe esperar el Quality Gate DE CADA análisis por separado.
+                    // Si lanzas los dos juntos y luego un solo waitForQualityGate, Jenkins solo verificará el último.
+                    
+                    // Análisis FrontEnd
                     withSonarQubeEnv('SonarQubeServer') {
-                        // Análisis FrontEnd
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_FE_DEV -Dsonar.sources=HOSPITAL_SYSTEM_REACT/src"
-                        
-                        // Análisis BackEnd
+                    }
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                    
+                    // Análisis BackEnd
+                    withSonarQubeEnv('SonarQubeServer') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_BE_DEV -Dsonar.sources=sistema_adfs"
                     }
-                }
-            }
-        }
-
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    // Requisito 3.b: Si no cumple el Quality Gate, aborta y envía correo
-                    waitForQualityGate abortPipeline: true
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
                 }
             }
         }
 
         stage('Deployment - DEV') {
             steps {
-                // Despliegue automático tras aprobación/merge (Requisito 3.a)
-                sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
+                script {
+                    // CORRECCIÓN 2: Inyectar el archivo .env.dev desde credenciales
+                    // Sin esto, Docker fallará porque no encontrará el archivo en el workspace.
+                    withCredentials([file(credentialsId: 'dev-env-file', variable: 'DEV_ENV_SECRET')]) {
+                        sh "cp \$DEV_ENV_SECRET ${ENV_FILE}"
+                        sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
+                    }
+                }
             }
         }
     }
     post {
         failure {
-            // Requisito 3.b: Enviar correo al Lead Developer y Product Owner
             mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
-                 subject: "Pipeline Fallido: Ambiente DEV",
-                 body: "El despliegue o la revisión de SonarQube falló. Por favor revisar los logs en Jenkins."
+                 subject: "❌ Pipeline Fallido: Ambiente DEV",
+                 body: "El despliegue o la revisión de SonarQube falló. Revisar en: ${env.BUILD_URL}"
+        }
+        success {
+            mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
+                 subject: "✅ Pipeline Exitoso: Ambiente DEV",
+                 body: "El ambiente DEV ha sido actualizado correctamente."
         }
     }
 }
