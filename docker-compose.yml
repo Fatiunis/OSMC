@@ -3,7 +3,7 @@ services:
     image: mysql:8.0
     container_name: mysql_${ENV_NAME}
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: hospital_${ENV_NAME} # DB única por ambiente
     ports:
       - "${DB_PORT}:3306" # Dev: 3306, UAT: 3307, Prod: 3308
@@ -22,13 +22,15 @@ services:
       DB_HOST: mysql
       DB_NAME: hospital_${ENV_NAME}
       DB_USER: root
-      DB_PASS: rootpassword
+      DB_PASS: ${MYSQL_ROOT_PASSWORD}
     depends_on:
       - mysql
     volumes:
       - ./sistema_adfs:/var/www/html  # Sincroniza código del backend
     networks:
       - hospital_net
+    expose:
+      - "80" # Expose internal port to the network only
 
   frontend:
     build: ./HOSPITAL_SYSTEM_REACT
@@ -37,13 +39,19 @@ services:
       - "${FE_PORT}:5173" # Dev: 5173, UAT: 5174, Prod: 3000
     # El host 0.0.0.0 es vital para que responda fuera del contenedor
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
+    expose:
+      - "5173" # Expose internal port to the network only
     environment:
       - VITE_API_URL=http://localhost:${BE_PORT}
+      #- VITE_API_URL=http://backend:80 
+      #- VITE_API_URL=http://localhost:${BE_PORT} 
     volumes:
       - ./HOSPITAL_SYSTEM_REACT:/app # Sincroniza tu código local con /app
       - /app/node_modules           # Protege los módulos instalados en el contenedor
     networks:
       - hospital_net
+
+    
 
 networks:
   # Red para que los contenedores se hablen entre sí por nombre de servicio

@@ -14,3 +14,246 @@ Array
 )
 
 
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DB_NAME: hospital_dev
+DECODIFICADO:
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
+DECODIFICADO:
+Array
+(
+    [correo] => admin@ejemplo.com
+    [password] => admin123
+)
+
+
