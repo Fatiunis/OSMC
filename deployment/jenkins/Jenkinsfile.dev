@@ -17,10 +17,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'SonarScanner'
                     
-                    // CORRECCIÓN 1: Se debe esperar el Quality Gate DE CADA análisis por separado.
-                    // Si lanzas los dos juntos y luego un solo waitForQualityGate, Jenkins solo verificará el último.
-                    
-                    // Análisis FrontEnd
+                    // Análisis FrontEnd + Espera
                     withSonarQubeEnv('SonarQubeServer') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_FE_DEV -Dsonar.sources=HOSPITAL_SYSTEM_REACT/src"
                     }
@@ -28,7 +25,7 @@ pipeline {
                         waitForQualityGate abortPipeline: true
                     }
                     
-                    // Análisis BackEnd
+                    // Análisis BackEnd + Espera
                     withSonarQubeEnv('SonarQubeServer') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_BE_DEV -Dsonar.sources=sistema_adfs"
                     }
@@ -42,8 +39,7 @@ pipeline {
         stage('Deployment - DEV') {
             steps {
                 script {
-                    // CORRECCIÓN 2: Inyectar el archivo .env.dev desde credenciales
-                    // Sin esto, Docker fallará porque no encontrará el archivo en el workspace.
+                    // Requiere credencial 'dev-env-file' en Jenkins
                     withCredentials([file(credentialsId: 'dev-env-file', variable: 'DEV_ENV_SECRET')]) {
                         sh "cp \$DEV_ENV_SECRET ${ENV_FILE}"
                         sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
@@ -53,15 +49,15 @@ pipeline {
         }
     }
     post {
-        failure {
-            mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
-                 subject: "❌ Pipeline Fallido: Ambiente DEV",
-                 body: "El despliegue o la revisión de SonarQube falló. Revisar en: ${env.BUILD_URL}"
-        }
         success {
             mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
                  subject: "✅ Pipeline Exitoso: Ambiente DEV",
                  body: "El ambiente DEV ha sido actualizado correctamente."
+        }
+        failure {
+            mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
+                 subject: "❌ Pipeline Fallido: Ambiente DEV",
+                 body: "Fallo en DEV. Revisar logs en: ${env.BUILD_URL}"
         }
     }
 }
