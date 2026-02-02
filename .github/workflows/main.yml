@@ -17,14 +17,12 @@ jobs:
           fetch-depth: 0  # Permite un análisis completo del historial
 
       - name: SonarQube Scan
-        # Usa la última versión estable (v4)
         uses: SonarSource/sonarqube-scan-action@v4 
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: Wait for Quality Gate status
-        # Usa la última versión estable (v2)
         uses: SonarSource/sonarqube-quality-gate-action@v2 
         timeout-minutes: 5
         env:
