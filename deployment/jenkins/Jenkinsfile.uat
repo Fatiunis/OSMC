@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        // ID de la credencial creada en Jenkins para SonarQube
         SONAR_TOKEN = credentials('sonar-token')
         ENV_FILE = ".env.uat"
         PROJECT_NAME = "hospital_uat"
@@ -13,45 +12,52 @@ pipeline {
             }
         }
         
-        stage('SonarQube Analysis (BE & FE)') {
+        stage('SonarQube Analysis & Quality Gate') {
             steps {
                 script {
-                    // Requisito 3.d.iii: Proyectos independientes por ambiente y área
-                    def scannerHome = tool 'SonarScanner' // Nombre configurado en Jenkins Tools
+                    def scannerHome = tool 'SonarScanner'
                     
+                    // Análisis FrontEnd + Espera
                     withSonarQubeEnv('SonarQubeServer') {
-                        // Análisis FrontEnd
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_FE_UAT -Dsonar.sources=HOSPITAL_SYSTEM_REACT/src"
-                        
-                        // Análisis BackEnd
+                    }
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
+                    }
+                    
+                    // Análisis BackEnd + Espera
+                    withSonarQubeEnv('SonarQubeServer') {
                         sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=HOSPITAL_BE_UAT -Dsonar.sources=sistema_adfs"
+                    }
+                    timeout(time: 5, unit: 'MINUTES') {
+                        waitForQualityGate abortPipeline: true
                     }
                 }
             }
         }
 
-        stage('Quality Gate') {
+        stage('Deployment - UAT') {
             steps {
-                timeout(time: 5, unit: 'MINUTES') {
-                    // Requisito 3.b: Si no cumple el Quality Gate, aborta y envía correo
-                    waitForQualityGate abortPipeline: true
+                script {
+                    // Requiere credencial 'uat-env-file' en Jenkins
+                    withCredentials([file(credentialsId: 'uat-env-file', variable: 'UAT_ENV_SECRET')]) {
+                        sh "cp \$UAT_ENV_SECRET ${ENV_FILE}"
+                        sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
+                    }
                 }
-            }
-        }
-
-        stage('Deployment - DEV') {
-            steps {
-                // Despliegue automático tras aprobación/merge (Requisito 3.a)
-                sh "docker compose -p ${PROJECT_NAME} --env-file ${ENV_FILE} up -d --build"
             }
         }
     }
     post {
-        failure {
-            // Requisito 3.b: Enviar correo al Lead Developer y Product Owner
+        success {
             mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
-                 subject: "Pipeline Fallido: Ambiente DEV",
-                 body: "El despliegue o la revisión de SonarQube falló. Por favor revisar los logs en Jenkins."
+                 subject: "✅ Pipeline Exitoso: Ambiente UAT",
+                 body: "El despliegue en UAT se completó correctamente."
+        }
+        failure {
+            mail to: 'catedratico@ejemplo.edu, fplopez@unis.edu.gt',
+                 subject: "❌ Pipeline Fallido: Ambiente UAT",
+                 body: "Fallo en UAT. Revisar logs en: ${env.BUILD_URL}"
         }
     }
 }
