@@ -3,3 +3,4 @@
 .env.uat
 .env.prod
 .env
+actions-runner/
