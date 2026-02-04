@@ -4,13 +4,13 @@ FROM node:20-alpine
 # Set the working directory
 WORKDIR /app
 
-
+RUN ls -la .
 # 1. Copia SOLO los archivos de dependencias de la subcarpeta
 COPY HOSPITAL_SYSTEM_REACT/package*.json ./
 
 # 2. Instala dependencias
 RUN npm install
-
+RUN ls -la .
 COPY HOSPITAL_SYSTEM_REACT/ . 
 
 # 3. Copia SOLO el contenido de la subcarpeta de React al WORKDIR (/app)
