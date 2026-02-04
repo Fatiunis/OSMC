@@ -4,15 +4,17 @@ FROM node:20-alpine
 # Set the working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+
+# 1. Copia SOLO los archivos de dependencias de la subcarpeta
 COPY HOSPITAL_SYSTEM_REACT/package*.json ./
+
+# 2. Instala dependencias
 RUN npm install
 
 COPY HOSPITAL_SYSTEM_REACT/ . 
 
-
-# Copy the rest of your app
-COPY . .
+# 3. Copia SOLO el contenido de la subcarpeta de React al WORKDIR (/app)
+COPY HOSPITAL_SYSTEM_REACT/ .
 
 # Expose the port Vite/React uses
 EXPOSE 5173
