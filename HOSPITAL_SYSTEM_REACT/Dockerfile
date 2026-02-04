@@ -5,8 +5,11 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Copy package files and install dependencies
-COPY package*.json ./
+COPY HOSPITAL_SYSTEM_REACT/package*.json ./
 RUN npm install
+
+COPY HOSPITAL_SYSTEM_REACT/ . 
+
 
 # Copy the rest of your app
 COPY . .
